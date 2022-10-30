@@ -12,11 +12,7 @@ public class ConnectionFactory {
     
     public Connection getConexao(){
         try{
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:33/escola","root","");
-            
-            if(con != null){
-                System.out.println("Conexão com Banco de Dados estabelecida!");
-            }
+            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:33/escola","root","");                       
         }catch(SQLException e){
             System.out.println(e);
         }

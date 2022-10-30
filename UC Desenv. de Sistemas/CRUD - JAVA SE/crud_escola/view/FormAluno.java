@@ -41,8 +41,8 @@ public class FormAluno extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         txtTelefone = new javax.swing.JTextPane();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -67,6 +67,8 @@ public class FormAluno extends javax.swing.JFrame {
 
         jLabel1.setText("Código:");
 
+        txtCodigo.setEditable(false);
+        txtCodigo.setBackground(new java.awt.Color(255, 0, 0));
         jScrollPane2.setViewportView(txtCodigo);
 
         jLabel2.setText("Nome:");
@@ -77,14 +79,19 @@ public class FormAluno extends javax.swing.JFrame {
 
         jLabel4.setText("Telefone:");
 
-        jButton1.setText("Excluir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Limpar");
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,9 +127,9 @@ public class FormAluno extends javax.swing.JFrame {
                 .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnExcluir)
                         .addGap(54, 54, 54)
-                        .addComponent(jButton2)
+                        .addComponent(btnLimpar)
                         .addGap(49, 49, 49)
                         .addComponent(btnSalvar))
                     .addGroup(layout.createSequentialGroup()
@@ -138,9 +145,9 @@ public class FormAluno extends javax.swing.JFrame {
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jScrollPane4)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel5)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
@@ -165,9 +172,9 @@ public class FormAluno extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
+                    .addComponent(btnLimpar)
                     .addComponent(btnSalvar)
-                    .addComponent(jButton1))
+                    .addComponent(btnExcluir))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
@@ -180,27 +187,20 @@ public class FormAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        String nome, telefone;
-        int codigo;
-        
-        nome = txtNome.getText();
-        telefone = txtTelefone.getText();
-        codigo = Integer.parseInt(txtCodigo.getText());
-        
-        Aluno objAluno = new Aluno();
-        objAluno.setCodigo(codigo);
-        objAluno.setNome(nome);
-        objAluno.setTelefone(telefone);
-        
-        AlunoDAO objalunodao = new AlunoDAO();
-        objalunodao.createAluno(objAluno);
+        cadastrarAluno();
+        limparDados();
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        limparDados();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,11 +236,32 @@ public class FormAluno extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void cadastrarAluno(){
+        String nome, telefone;
+                
+        nome = txtNome.getText();
+        telefone = txtTelefone.getText();
+               
+        Aluno objAluno = new Aluno();
+        objAluno.setNome(nome);
+        objAluno.setTelefone(telefone);
+        
+        AlunoDAO objalunodao = new AlunoDAO();
+        objalunodao.createAluno(objAluno);
+    }
+    
+    private void limparDados(){
+        txtNome.setText("");
+        txtTelefone.setText("");
+        txtPesquisar.setText("");
+        txtNome.requestFocus();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

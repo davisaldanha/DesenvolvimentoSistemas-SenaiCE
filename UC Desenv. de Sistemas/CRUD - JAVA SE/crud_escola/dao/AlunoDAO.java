@@ -19,13 +19,12 @@ public class AlunoDAO {
     }
     
     public void createAluno(Aluno aluno){
-        String sql =  "insert into aluno(idAluno, nome, telefone) values(?,?,?)";
+        String sql =  "insert into aluno(nome, telefone) values(?,?)";
                        
         try {
             pstm = (PreparedStatement) con.prepareStatement(sql);
-            pstm.setInt(1, aluno.getCodigo());
-            pstm.setString(2, aluno.getNome());
-            pstm.setString(3, aluno.getTelefone());
+            pstm.setString(1, aluno.getNome());
+            pstm.setString(2, aluno.getTelefone());
             
             pstm.execute();
             pstm.close();

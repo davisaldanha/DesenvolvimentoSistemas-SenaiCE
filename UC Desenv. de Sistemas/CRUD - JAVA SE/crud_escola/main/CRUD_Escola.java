@@ -17,9 +17,7 @@ public class CRUD_Escola {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ConnectionFactory con = new ConnectionFactory();
-        con.getConexao();
-        
+            
         FormAluno form = new FormAluno();
         form.setVisible(true);
     }
