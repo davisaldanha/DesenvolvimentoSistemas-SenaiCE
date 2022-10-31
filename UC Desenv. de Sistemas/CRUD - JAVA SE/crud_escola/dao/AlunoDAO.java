@@ -2,7 +2,9 @@ package crud_escola.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import crud_escola.model.Aluno;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +15,8 @@ import javax.swing.JOptionPane;
 public class AlunoDAO {
     Connection con = null;
     PreparedStatement pstm = null;
+    ResultSet rs;
+    ArrayList<Aluno> lista = new ArrayList<>();
     
     public AlunoDAO(){
         con = new ConnectionFactory().getConexao();
@@ -32,5 +36,28 @@ public class AlunoDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Cadastrar Aluno" + e);
         }
+    }
+    
+    public ArrayList<Aluno> readyAluno(){
+        String sql = "select * from aluno";
+        
+        try {
+            pstm = con.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                Aluno aluno = new Aluno();
+                aluno.setCodigo(rs.getInt("idAluno"));
+                aluno.setNome(rs.getString("nome"));
+                aluno.setTelefone(rs.getString("telefone"));
+                
+                lista.add(aluno);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ready Aluno: " + e);
+        }
+        
+        return lista;
     }
 }

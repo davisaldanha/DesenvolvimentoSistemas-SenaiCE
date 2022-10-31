@@ -6,6 +6,9 @@ package crud_escola.view;
 
 import crud_escola.dao.AlunoDAO;
 import crud_escola.model.Aluno;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +21,7 @@ public class FormAluno extends javax.swing.JFrame {
      */
     public FormAluno() {
         initComponents();
+        listarAluno();
     }
 
     /**
@@ -45,7 +49,7 @@ public class FormAluno extends javax.swing.JFrame {
         btnLimpar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbAluno = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtPesquisar = new javax.swing.JTextPane();
@@ -100,7 +104,7 @@ public class FormAluno extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbAluno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -112,8 +116,8 @@ public class FormAluno extends javax.swing.JFrame {
                 "Código", "Nome", "Telefone"
             }
         ));
-        jTable2.setShowGrid(true);
-        jScrollPane5.setViewportView(jTable2);
+        tbAluno.setShowGrid(true);
+        jScrollPane5.setViewportView(tbAluno);
 
         jLabel5.setText("Pesquisar: Nome/Telefone ");
 
@@ -195,6 +199,7 @@ public class FormAluno extends javax.swing.JFrame {
         // TODO add your handling code here:
         cadastrarAluno();
         limparDados();
+        listarAluno(); 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -236,27 +241,7 @@ public class FormAluno extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void cadastrarAluno(){
-        String nome, telefone;
-                
-        nome = txtNome.getText();
-        telefone = txtTelefone.getText();
-               
-        Aluno objAluno = new Aluno();
-        objAluno.setNome(nome);
-        objAluno.setTelefone(telefone);
-        
-        AlunoDAO objalunodao = new AlunoDAO();
-        objalunodao.createAluno(objAluno);
-    }
-    
-    private void limparDados(){
-        txtNome.setText("");
-        txtTelefone.setText("");
-        txtPesquisar.setText("");
-        txtNome.requestFocus();
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
@@ -274,10 +259,53 @@ public class FormAluno extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tbAluno;
     private javax.swing.JTextPane txtCodigo;
     private javax.swing.JTextPane txtNome;
     private javax.swing.JTextPane txtPesquisar;
     private javax.swing.JTextPane txtTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void cadastrarAluno() {
+        String nome, telefone;
+
+        nome = txtNome.getText();
+        telefone = txtTelefone.getText();
+
+        Aluno objAluno = new Aluno();
+        objAluno.setNome(nome);
+        objAluno.setTelefone(telefone);
+
+        AlunoDAO objalunodao = new AlunoDAO();
+        objalunodao.createAluno(objAluno);
+    }
+
+    private void limparDados() {
+        txtNome.setText("");
+        txtTelefone.setText("");
+        txtPesquisar.setText("");
+        txtNome.requestFocus();
+    }
+
+    private void listarAluno() {
+        try {
+            AlunoDAO objalunodao = new AlunoDAO();
+
+            DefaultTableModel model = (DefaultTableModel) tbAluno.getModel();
+            model.setNumRows(0);
+
+            ArrayList<Aluno> lista = objalunodao.readyAluno();
+
+            for (int i = 0; i < lista.size(); i++) {
+                model.addRow(new Object[]{
+                    lista.get(i).getCodigo(),
+                    lista.get(i).getNome(),
+                    lista.get(i).getTelefone()
+                });
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Listar Aluno: " + e);
+        }
+    }
 }
