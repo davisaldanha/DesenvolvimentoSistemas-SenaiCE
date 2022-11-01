@@ -53,6 +53,7 @@ public class FormAluno extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtPesquisar = new javax.swing.JTextPane();
+        btnCarregarCampos = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,7 +122,19 @@ public class FormAluno extends javax.swing.JFrame {
 
         jLabel5.setText("Pesquisar: Nome/Telefone ");
 
+        txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPesquisarKeyTyped(evt);
+            }
+        });
         jScrollPane6.setViewportView(txtPesquisar);
+
+        btnCarregarCampos.setText("Carregar Campos");
+        btnCarregarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarregarCamposActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,6 +143,7 @@ public class FormAluno extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCarregarCampos)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnExcluir)
                         .addGap(54, 54, 54)
@@ -181,7 +195,9 @@ public class FormAluno extends javax.swing.JFrame {
                     .addComponent(btnExcluir))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCarregarCampos)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,6 +222,17 @@ public class FormAluno extends javax.swing.JFrame {
         // TODO add your handling code here:
         limparDados();
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void txtPesquisarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyTyped
+        // TODO add your handling code here:
+        String pesquisar = txtPesquisar.getText();
+        pesquisarAluno(pesquisar);
+    }//GEN-LAST:event_txtPesquisarKeyTyped
+
+    private void btnCarregarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarCamposActionPerformed
+        // TODO add your handling code here:
+        carregarCampos();
+    }//GEN-LAST:event_btnCarregarCamposActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,6 +271,7 @@ public class FormAluno extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCarregarCampos;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
@@ -307,5 +335,35 @@ public class FormAluno extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Listar Aluno: " + e);
         }
+    }
+    
+    private void pesquisarAluno(String descricao) {
+        try {
+            AlunoDAO objalunodao = new AlunoDAO();
+
+            DefaultTableModel model = (DefaultTableModel) tbAluno.getModel();
+            model.setNumRows(0);
+
+            ArrayList<Aluno> lista = objalunodao.searchAluno(descricao);
+
+            for (int i = 0; i < lista.size(); i++) {
+                model.addRow(new Object[]{
+                    lista.get(i).getCodigo(),
+                    lista.get(i).getNome(),
+                    lista.get(i).getTelefone()
+                });
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Listar Aluno: " + e);
+        }
+    }
+    
+    private void carregarCampos(){
+        int setar = tbAluno.getSelectedRow();
+        
+        txtCodigo.setText(tbAluno.getModel().getValueAt(setar, 0).toString());
+        txtNome.setText(tbAluno.getModel().getValueAt(setar, 1).toString());
+        txtTelefone.setText(tbAluno.getModel().getValueAt(setar, 2).toString());
     }
 }

@@ -60,4 +60,27 @@ public class AlunoDAO {
         
         return lista;
     }
+    
+    public ArrayList<Aluno> searchAluno(String descricao){
+        String sql = "select * from aluno where nome like '%"+descricao+"%'";
+        
+        try {
+            pstm = con.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                Aluno aluno = new Aluno();
+                aluno.setCodigo(rs.getInt("idAluno"));
+                aluno.setNome(rs.getString("nome"));
+                aluno.setTelefone(rs.getString("telefone"));
+                
+                lista.add(aluno);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ready Aluno: " + e);
+        }
+        
+        return lista;
+    }
 }
