@@ -1,34 +1,176 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login- Acessar Sistema</title>
-    <link rel="stylesheet" href="style.css">
-    
-</head>
-<body>
-  <main class="container">
-    <h2>Login</h2>
-    <form>
-        <div class="input">
-            
-            <input  type="text" name="username" id="username" placeholder="Insira o seu Usuário">
-        </div>
-        <div class="input">
-            <input  type="password" name="password" id="password" placeholder="Insira a sua Senha">
-        </div>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title> Aula 1 - DEV WEB</title>
+	</head>
+	<body>
+		
+		<h1>Olá mundo!</h1>
+		<p><b>The quick brown fox jumps over the lazy dog.</b> The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.
+		</p>
+		<abbr title="Davi da Silva Saldanha"><p>Prof.</p></abbr>
+		
+		<hr />
+		<h2>Olá mundo!</h2>
 
-        <input type="submit" value="Entrar" id="submit">
-    </form>
-    <div class="checkbox">
-        <input type="checkbox" name="lembrar"> Lembrar Usuário
-    </div>
-    <div class="text">
-        Não possui conta? <a href="">Clique aqui</a> 
-    </div>
-  </main>
- 
-</body>
+		<blockquote cite="www.google.com">
+			<p><i>The quick brown fox jumps over the lazy dog.</i> The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.</p>
+		</blockquote>
+		<h1>H<sub>2</sub>O</h1>
+		<h1>4<sup>th</sup></h1>
+		
+		<h4>Linguagens de Programação</h4>
+		<dl>
+			<figure>
+				<img src="imagens\python.png" title="Icone Python"  height="50" width="50" />
+				<figcaption>Icone da linguagem de programação Python!</figcaption>
+			</figure>
+			<dt><a href="https://www.python.org/" target="_blank">Python</a></dt>
+			<dd>Linguagem de programação para desenvolvimento de sistemas desktop, mobile e web</dd>
+
+			<figure>
+				<img src="imagens\java.png" title="Icone Java" height="100" width="100"/>
+				<figcaption>Icone da linguagem de programação Java!</figcaption>
+			</figure>
+			<dt><a href="https://www.java.com/pt-BR/" target="_blank">Java</a></dt>
+			<dd>Linguagem de programação para desenvolvimento de sistemas desktop, mobile e web</dd>
+
+			<dt>Javascript</dt>
+			<dd>Linguagem de programação para desenvolvimento de sistemas desktop, mobile e web</dd>
+
+			<dt>Ruby</dt>
+			<dd>Linguagem de programação para desenvolvimento de sistemas desktop, mobile e web</dd>
+		</dl>
+
+		<hr />
+		<table>
+			<tr>
+				<td></td>
+				<th scope="col">A</th>
+				<th scope="col">B</th>
+				<th scope="col">C</th>
+			</tr>
+			<tr>
+				<th scope="row">A</th>
+				<td>15</td>
+				<td>15</td>
+				<td>30</td>
+			</tr>
+			<tr>
+				<th scope="row">B</th>
+				<td>45</td>
+				<td>60</td>
+				<td>45</td>
+			</tr>
+			<tr>
+				<th scope="row">C</th>
+				<td>60</td>
+				<td>90</td>
+				<td>90</td>
+			</tr>
+		</table>
+		<hr />
+		<table>
+			<tr>
+				<td></td>
+				<td colspan="3"> Vendas Trimestre</td>
+			</tr>
+			<tr>
+				<th scope="col">Nome</th>
+				<th scope="col">JAN</th>
+				<th scope="col">FEV</th>
+				<th scope="col">MAR</th>
+			</tr>
+			<tr>
+				<td>DAVI</td>
+				<td>100</td>
+				<td>100</td>
+				<td>10</td>
+			</tr>
+			<tr>
+				<td>PEDRO</td>
+				<td>120</td>
+				<td>1000</td>
+				<td>150</td>
+			</tr>
+			<tr>
+				<td>GABY</td>
+				<td>1</td>
+				<td>100</td>
+				<td>10</td>
+			</tr>
+		</table>
+		<hr />
+		<form action="google.com" method="get">
+			<h3>Login</h3>
+
+			E-mail: <input type="email" name="email" placeholder="Insira seu email" required><br />
+
+			Senha: <input type="password" name="password" placeholder="Insira sua senha" required><br />
+
+			<input type="checkbox" name=""> Manter conectado.<br />
+
+			<input type="submit" name="enviar" value="Enviar"><br />
+
+			Não possui cadastro? <button><img src="imagens\teste.webp" width="15" height="15"></button>
+			<br />
+		</form>
+		<hr />
+
+		<fieldset>
+			<legend>Pesquisa de Satisfação</legend>
+			<form action="#"l method="post">
+				<p>Informe os dados abaixo.</p>
+				<table>
+					<tr>
+						<td>
+							<label>
+								Nome:
+								<input type="text" name="" value="">
+							</label>
+						</td>
+						<td>
+							<label>
+								E-mail:
+								<input type="email" name="" required>
+							</label>
+						</td>
+					</tr>
+				</table><br />						
+				
+					1. Qual o seu nível de conhecimento em Java?<br />
+				
+					<input type="radio" name="conJava" value="baby">
+					<label for="baby">Baby</label><br />
+					<input type="radio" name="conJava" value="intermediario">
+					<label for="intermediario">Intermediário</label><br />
+					<input type="radio" name="conJava" value="jedi">
+					<label for="jedi">Jedi</label><br />
+				
+				
+					2. Qual linguagem de programação você quer aprender?<br />
+
+					<input type="checkbox" name="lingProg" value="php">
+					<label for="php">PHP</label><br />
+					<input type="checkbox" name="lingProg" value="java">
+					<label for="java">Java</label><br />
+					<input type="checkbox" name="lingProg" value="python">
+					<label for="python">Python</label><br />
+					<input type="checkbox" name="lingProg" value="ruby">
+					<label for="ruby">Ruby</label><br />
+
+					3. Qual o seu nível de senioridade?<br />
+					<select name="">
+						<option value="junior">Júnior</option>
+						<option value="pleno">Pleno</option>
+						<option value="senior">Sênior</option>
+					</select>
+					<br /><br />
+
+					<input type="submit" name="Enviar" value="Enviar">				
+			</form>
+		</fieldset>
+
+	</body>
 </html>
