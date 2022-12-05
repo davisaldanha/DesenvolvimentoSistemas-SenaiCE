@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Readex+Pro:wght@200;400&display=swap');
+
+
+* {
+	font-family:  'Readex Pro', sans-serif;
+	margin: 0;
+	border: 0;
+	padding: 0;
+}
+
+body {
+	background: linear-gradient(45deg, #8e2de2, #4a00e0);
+	background-repeat: no-repeat;
+	min-height: 720px;
+	min-width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+main.container {
+	background: white;
+	min-height: 300px;
+	min-width: 200px;
+	padding: 35px;
+	box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.8);
+	border-radius: 8px;
+
+}
+
+main h1 {
+	margin-bottom: 30px;
+}
+
+.input input{
+	margin-bottom: 15px;
+	outline: none;
+	font-size: 18px;
+	color: rgba(0, 0, 0, 0.5);
+	height: 40px;
+	width: 300px;
+}
+
+form input[type="submit"] {
+	background: linear-gradient(to left, #8e2de2, #4a00e0);
+	color: white;
+	padding: 10px;
+	border-radius: 10px;
+	font-size: 18px;
+
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+form input[type="submit"]:hover{
+	letter-spacing: 2px;
+	background: linear-gradient(to right, #8e2de2, #4a00e0);
+}
+
+.input input:focus{
+	border: 2px solid;
+	border-color: #8e2de2;
+	border-radius: 8px;
+}
