@@ -45,7 +45,7 @@ public class Emprestimo {
     
     //método para retornar o valor total a ser pago do empréstimo. Aqui já será aplicado o juros.
     public double valorTotal(){
-        return this.valor*(1+this.juros)*this.qtParcelas;
+        return this.valor*Math.pow((1+(this.juros/100)),this.qtParcelas);
     }
     
     //método que retorna as informações do empréstimo
